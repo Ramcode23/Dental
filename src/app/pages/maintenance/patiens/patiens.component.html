@@ -1,0 +1,55 @@
+<div class="row animate__animated animate__fadeIn">
+    <div class="col ml-5 mt-5">
+        <a routerLink="/admin/patient" type="button" class="btn btn-primary btn-lg mb-2"> Create</a>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Patiens</h3>
+
+                <br>
+                <div class="input-group col-md-5 float-md-right float-lg-right float-right mb-1">
+                    <input (keyup)="search(field.value)" type="text" value="" class="form-control" placeholder="Search" #field>
+                    <div class="input-group-append">
+                        <button (click)="search(field.value)" class="btn btn-primary" type="button">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                    </div>
+                </div>
+
+                <div *ngIf="loanding">
+                    <app-loader> Loandin........ </app-loader>
+                </div>
+                <app-nodata *ngIf="patiens.length==0 && loanding==false"></app-nodata>
+
+                <div class="card-body" *ngIf="patiens.length>0 && loanding==false">
+                    <div class="table-responsive table-responsive-sm table-responsive-md">
+
+                        <table class="table animate__animated animate__fadeIn">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Country</th>
+                                    <th>Gender</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let patien of patiens | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+
+                                    <td>{{patien.name}}</td>
+                                    <td>{{patien.email}}</td>
+                                    <td>{{patien.country}}</td>
+                                    <td>{{patien.gender}}</td>
+                                    <td><button routerLink="/admin/patient/{{patien.id}}" type="button" class="btn btn-info"><i class="far fa-edit"></i>Edit</button></td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <ngb-pagination [pageSize]="5" [collectionSize]="patiens.length" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
+                </div>
+            </div>
+        </div>
+
+    </div>

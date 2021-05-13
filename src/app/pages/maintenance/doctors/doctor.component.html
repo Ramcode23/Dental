@@ -1,0 +1,102 @@
+<div class="row animate__animated animate__fadeIn">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-10">
+        <div class="card">
+            <form (ngSubmit)="save(doctorForm.value)" [formGroup]="doctorForm">
+                <div class="card-header">
+                    <h3 class="card-title">Doctor</h3>
+                </div>
+
+
+                <div class="card-body">
+                    <input formControlName="name" type="text" class="form-control" placeholder="Name" [ngClass]="formsService.isValidField('name',doctorForm)">
+                    <div *ngIf=" formsService.isRequiredField('name',doctorForm)">
+                        <span class="text-danger">
+                            Please enter a name
+
+                        </span>
+                    </div>
+                    <br>
+                    <input formControlName="email" type="email" class="form-control" placeholder="Email" value="" [ngClass]="formsService.isValidField('email',doctorForm)">
+                    <div *ngIf=" formsService.isRequiredField('email',doctorForm)">
+                        <span class="text-danger">
+                            Please enter an email
+
+                        </span>
+                    </div>
+                    <div *ngIf="formsService. isEmailField('email',doctorForm)">
+                        <span class="text-danger">
+                            Please enter a  valid email
+
+                        </span>
+                    </div>
+
+
+                    <br>
+                    <textarea formControlName="notes" class="form-control" placeholder="Notes" rows="4" [ngClass]="formsService.isValidField('notes',doctorForm)"></textarea>
+
+
+                    <div *ngIf="formsService. isMaxField('notes',doctorForm)">
+                        <span class="text-danger">
+                            The note must be less than or equal to {{doctorForm.get('notes').errors?.maxlength?.requiredLength}}
+
+                        </span>
+                    </div>
+
+                    <br>
+                    <select formControlName="country" class="form-control" [ngClass]="formsService.isValidField('country',doctorForm)">
+                        <option *ngFor="let country of countries; let i=index" value={{country.name}}> {{country.name}}</option>
+                    </select>
+                    <div *ngIf=" formsService.isRequiredField('country',doctorForm)">
+                        <span class="text-danger">
+                            Please select a country
+
+                        </span>
+                    </div>
+                    <br>
+
+
+
+
+                    <div class="form-check">
+                        <input class="form-check-input" id="male" formControlName="gender" name="gender" value="Male" type="radio" [ngClass]="formsService.isValidField('gender',doctorForm)">
+                        <label class="form-check-label" for="male">
+           Male
+          </label>
+
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" id="female" formControlName="gender" name="gender" value="Female" type="radio" [ngClass]="formsService.isValidField('gender',doctorForm)">
+                        <label class="form-check-label" for="female">
+           Female
+          </label>
+
+                    </div>
+
+
+
+                    <div *ngIf=" formsService.isRequiredField('gender',doctorForm)">
+                        <span class="text-danger">
+                            Please select a gender
+                        </span>
+                    </div>
+
+                    <br>
+                    <button [disabled]="doctorForm.invalid" class="btn btn-primary btn-block" type="submit">{{btnTitle}}</button>
+                </div>
+
+
+
+            </form>
+        </div>
+    </div>
+
+    <div class="col-md-1">
+    </div>
+
+
+
+
+</div>

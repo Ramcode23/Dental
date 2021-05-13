@@ -1,0 +1,28 @@
+<!-- Modal -->
+<div [ngClass]="{'show': showModal}" class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add a Service</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <form [formGroup]="serviceForm">
+                <div class="modal-body">
+                    <input formControlName="desc" type="text" class="form-control" placeholder="Description" [ngClass]="formsService.isValidField('desc',serviceForm)">
+                    <div *ngIf=" formsService.isRequiredField('desc',serviceForm)">
+                        <span class="text-danger">
+                        Please enter a Description
+                    </span>
+                    </div>
+                    <br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button [disabled]="serviceForm.invalid" (click)="save(serviceForm.value)" class="btn btn-primary" showModal=false type="button" data-dismiss="modal">{{btnTitle}} </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,86 @@
+<div [ngClass]="{'show': showModal}" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form [formGroup]="formApoiment">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title" id="exampleModalLabel">Event</h1>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <div *ngIf="errors.length>0" class="alert alert-danger animate__animated animate__fadeIn  animate__delay-2s " role="alert">
+                        <h4 class="alert-heading"></h4>
+                        <p class="animate__animated animate__fadeIn  animate__delay-2s " *ngFor="let error of errors">{{error}}</p>
+                        <p class="mb-0"></p>
+                    </div>
+                    <div class="card">
+
+                        <div class="card-body">
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="title">Title</span>
+                                </div>
+                                <input formControlName="title" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="title" [ngClass]="formsService.isValidField('title',formApoiment)">
+                            </div>
+                            <div *ngIf="formsService.isRequiredField('title',formApoiment)">
+                                <span class="text-danger">
+                            Please add a title </span>
+                            </div>
+
+                            <div class="form-group">
+                                <input formControlName="date" class="form-control" id="date" type="date" [ngClass]="formsService.isValidField('date',formApoiment)">
+                            </div>
+                            <div *ngIf="formsService.isRequiredField('date',formApoiment)">
+                                <span class="text-danger">
+                            Please select a Date  </span>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="patient">Patient</label>
+                                </div>
+                                <select formControlName="patien" class="custom-select" id="patient" [ngClass]="formsService.isValidField('patien',formApoiment)">
+                                <option *ngFor="let patien of patiens; let i=index" value={{patien.id}}>{{patien.name}}</option>   
+                            </select>
+                            </div>
+                            <div *ngIf="formsService.isRequiredField('patien',formApoiment)">
+                                <span class="text-danger">
+                            Please select a Patient  </span>
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="doctor">Doctor</label>
+                                </div>
+                                <select formControlName="doctor" class="custom-select" id="doctor" [ngClass]="formsService.isValidField('doctor',formApoiment)">
+                                <option *ngFor="let doctor of doctors; let i=index" value={{doctor.id}}>{{doctor.name}}</option>   
+                            </select>
+                            </div>
+                            <div *ngIf="formsService.isRequiredField('doctor',formApoiment)">
+                                <span class="text-danger">
+                                Please select a Doctor   
+                            </span>
+                            </div>
+                            <div class="form-group">
+                                <textarea formControlName="coment" class="form-control" id="coment" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button (click)="showModal=false" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button [disabled]="formApoiment.invalid" (click)="addApoiment(formApoiment.value);showModal=false " type="button" class="btn btn-primary " data-dismiss="modal">   Save changes</button>
+
+
+                </div>
+            </div>
+
+
+
+
+
+        </form>
+
+    </div>
+</div>

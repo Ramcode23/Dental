@@ -1,0 +1,144 @@
+<div class="row animate__animated animate__fadeIn">
+    <div class="col-10  ml-5 mt-5">
+        <a routerLink="/admin/doctor" type="button" class="btn btn-primary btn-lg mb-2"> Create</a>
+
+
+        <div class="card">
+
+
+            <div class="card-header">
+                <h3 class="card-title">Doctors</h3>
+
+                <br>
+                <div class="input-group col-md-5 float-md-right float-lg-right float-right mb-1">
+                    <input (keyup)="search(field.value)" type="text" value="" class="form-control" placeholder="Search" #field>
+                    <div class="input-group-append">
+                        <button (click)="search(field.value)" class="btn btn-primary" type="button">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                    </div>
+                </div>
+                <br>
+                <div *ngIf="loanding">
+                    <app-loader> Loandin........ </app-loader>
+                </div>
+                <app-nodata *ngIf="doctors.length==0 && loanding==false"></app-nodata>
+
+                <div class="card-body " *ngIf="doctors.length>0 && loanding==false">
+                    <div class="table-responsive-sm table-responsive-md ">
+
+                        <table class="table animate__animated animate__fadeIn">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Country</th>
+                                    <th>Gender</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let doctor of doctors | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+
+                                    <td>{{doctor.name}}</td>
+                                    <td>{{doctor.email}}</td>
+                                    <td>{{doctor.country}}</td>
+                                    <td>{{doctor.gender}}</td>
+                                    <td><button routerLink="/admin/doctor/{{doctor.id}}" type="button" class="btn btn-info">Edit</button></td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+
+
+                    </div>
+                    <ngb-pagination [pageSize]="5" [collectionSize]="doctors.length" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- 
+
+<div class="row animate__animated animate__bounce">
+    <div class="col-md-10  ml-5 mt-5">
+
+        <a routerLink="/admin/doctor" type="button" class="btn btn-primary btn-lg mb-2">
+          Create
+    </a>
+
+
+
+        <div *ngIf="loanding">
+            <app-loader> Loandin........ </app-loader>
+        </div>
+        <app-nodata *ngIf="doctors.length==0 && loanding==false"></app-nodata>
+
+        <div class="card" *ngIf="doctors.length>0 && loanding==false">
+            <div class="card-header">
+                <h3 class="card-title">Doctors</h3>
+            </div>
+
+            <br>
+            <div class="input-group col-md-5 float-md-right float-lg-right float-right">
+                <input type="text" value="" class="form-control" placeholder="Search" #field>
+                <span class="input-group-btn"><button type="button" class="btn btn-primary">Search</button></span>
+            </div>
+            <div class="card-body ">
+
+
+                <div class="table-responsive">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Country</th>
+                                <th>Gender</th>
+                                <th>Actions</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let doctor of doctors">
+
+                                <td>{{doctor.name}}</td>
+                                <td>{{doctor.email}}</td>
+                                <td>{{doctor.country}}</td>
+                                <td>{{doctor.gender}}</td>
+                                <td><button routerLink="/admin/doctor/{{doctor.id}}" type="button" class="btn btn-info">Edit</button></td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+
+
+                </div>
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+</div> -->

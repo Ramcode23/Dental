@@ -1,0 +1,64 @@
+<div class="row animate__animated animate__fadeIn">
+    <div class="col-md-10  ml-5 mb-5">
+        <button (click)="show()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Add Service
+           </button>
+        <div class="card mt-2">
+
+
+            <div class="card-header">
+                <h3 class="card-title">Services List</h3>
+
+                <br>
+                <div class="input-group col-md-5 float-md-right float-lg-right float-right mb-1">
+                    <input (keyup)="search(field.value)" type="text" value="" class="form-control" placeholder="Search" #field>
+                    <div class="input-group-append">
+                        <button (click)="search(field.value)" class="btn btn-primary" type="button">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                    </div>
+                </div>
+
+                <div *ngIf="loanding">
+                    <app-loader> Loandin........ </app-loader>
+                </div>
+                <app-nodata *ngIf="services.length==0 && loanding==false"></app-nodata>
+
+
+                <div class="card-body " *ngIf="services.length>0 && loanding==false">
+
+
+
+
+                    <table class="table  animate__animated animate__fadeIn">
+                        <thead>
+                            <tr>
+
+                                <th>Description</th>
+                                <th>Actions</th>
+
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let service of services | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+
+                                <td>{{service.desc}}</td>
+
+                                <td class="right-align"><button (click)="selectEdit(service)" type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal"><i class="far fa-edit"></i>Edit</button></td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+
+                </div>
+                <ngb-pagination [pageSize]="3" [collectionSize]="services.length" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+<app-service showModal="showModal" [service]="service" [btnTitle]="btnTitle"></app-service>

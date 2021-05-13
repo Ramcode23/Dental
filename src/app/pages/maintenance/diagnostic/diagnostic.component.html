@@ -1,0 +1,188 @@
+<div class="card  animate__animated animate__fadeIn">
+    <div class="card-body">
+        <form (submit)="save(frmDiagnostic.value)" [formGroup]="frmDiagnostic">
+
+            <div class="row">
+                <div class="col">
+                    <h4 class="card-title">Diagnotic</h4>
+                </div>
+                <div class="col "><button [disabled]="frmDiagnostic.invalid || details.length==0" type="submit" class="btn btn-primary btn-lg float-right mr-2 mt-5"><i class="fas fa-save fa-2x"></i></button></div>
+            </div>
+
+            <div class="row">
+                <div class="col-4">
+
+                    <div class="form-group">
+                        <label for="date">Date:</label>
+                        <input formControlName="date" class="form-control" id="date" type="date" [ngClass]="formsService.isValidField('date',frmDiagnostic)">
+                    </div>
+                    <div *ngIf="formsService.isRequiredField('date',frmDiagnostic)">
+                        <span class="text-danger">
+                            Please select a Date
+    
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col">
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="patient">Patient</label>
+                        </div>
+                        <select formControlName="patien" class="custom-select" id="patient" [ngClass]="formsService.isValidField('patien',frmDiagnostic)">
+                            <option *ngFor="let patien of patiens; let i=index" value={{patien.id}}>{{patien.name}}</option>   
+                        </select>
+                    </div>
+
+                    <div *ngIf="formsService.isRequiredField('patien',frmDiagnostic)">
+                        <span class="text-danger">
+                            Please select a Patient
+
+                        </span>
+                    </div>
+                </div>
+                <div class="col">
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="doctor">Doctor</label>
+                        </div>
+                        <select formControlName="doctor" class="custom-select" id="doctor" [ngClass]="formsService.isValidField('doctor',frmDiagnostic)">
+                            <option *ngFor="let doctor of doctors; let i=index" value={{doctor.id}}>{{doctor.name}}</option>   
+                        </select>
+                    </div>
+                    <div *ngIf="formsService.isRequiredField('doctor',frmDiagnostic)">
+                        <span class="text-danger">
+                            Please select a Doctor
+
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+
+        </form>
+
+        <div class="row">
+            <div class="col-6">
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="service">Service</label>
+                    </div>
+                    <select class="custom-select" id="service" #serviceid>
+                        <option *ngFor="let service of services; let i=index" value={{service.id}}>{{service.desc}}</option>   
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-4">
+
+
+                <div class="input-group mb3">
+                    <input type="number" value="" class="form-control" placeholder="Quality" #quality>
+                    <div class="input-group-append">
+                        <button (click)="addDetails(serviceid.value,quality.value)" class="btn btn-success" type="button">
+                                <i class="fas fa-plus fa-sm"></i>
+                            </button>
+                    </div>
+                </div>
+
+
+                <!--       <div class="input-group mb-3">
+
+                    <div class="input-group-append">
+                        <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" #quality>
+                        <button (click)="addDetails(serviceid.value,quality.value)" class="btn btn-success" type="button" id="button-addon2"> <i class="fas fa-plus fa-sm"></i></button>
+                    </div>
+                </div> -->
+
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col">
+                <table class="table">
+                    <thead>
+                        <tr>
+
+                            <th>Description</th>
+                            <th>Quality</th>
+                            <th>Actions</th>
+
+                    </thead>
+                    <tbody *ngFor="let detail of details">
+                        <tr>
+
+                            <td>{{detail.desc}}</td>
+                            <td>{{detail.quality}}</td>
+
+                            <td class="right-align"><button (click)="deleteDetail(detail)" type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Delete</button></td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="card">
+
+    <div class="card-body">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-tag"></i></span>
+            <input formControlName="title" class="form-control border-danger" placeholder="Title" type="text">
+        </div>
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+            <input formControlName="date" class="form-control" type="date">
+        </div>
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+            <select formControlName="patien" class="form-control">
+                <option *ngFor="let patien of patiens; let i=index" value={{patien.name}}>{{patien.name}}</option>   
+            </select>
+        </div>
+
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
+            <select formControlName="doctor" class="form-control">
+                <option *ngFor="let doctor of doctors let i=index" value={{doctor.name}}>{{doctor.name}}</option>   
+            </select>
+        </div>
+
+        <br>
+        <textarea formControlName="coment" class="form-control" placeholder="Coment" rows="4" style="margin: 0px -7.5px 0px 0px; height: 128px; width: 458px;">
+
+    </textarea>
+    </div>
+</div> -->

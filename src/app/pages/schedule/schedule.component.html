@@ -1,0 +1,58 @@
+<div class="col-md-12 animate__animated animate__fadeIn">
+    <!-- TODO LIST -->
+    <button (click)="showModal=true" type="button" class="btn btn-primary btn-lg mb-2" data-toggle="modal" data-target="#exampleModal">
+        <i class="fas fa-plus"></i> Event
+           </button>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Schedule</h3>
+            <div class="right">
+                <button (click)="hidepanel()" type="button" class="btn btn-secondary"><i [ngClass]="classbutton"></i></button>
+
+            </div>
+        </div>
+        <div *ngIf="loanding">
+            <app-loader> Loandin........ </app-loader>
+        </div>
+        <div *ngIf="stylepanel" class="card-body  animate__animated animate__fadeIn">
+
+            <div class="row row-cols-1 row-cols-md-4">
+                <div class="col mb-4" *ngFor="let ap of apoiments| slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ; let i=index">
+                    <div class="card  animate__animated animate__fadeIn">
+
+                        <div class="card-body">
+
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+
+                                    <a (click)="doneApoiment(i)" class="btn btn-danger btn-circle btn-sm float-right">
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    </a>
+                                    <p> <strong>{{ap.title}} </strong> </p>
+
+                                    <p><span class="text-muted"> Doctor: {{ap.doctor}}</span></p>
+                                    <p><span class="text-muted">Patien: {{ap.patien}}</span></p>
+                                    <p> <span>{{ap.date|date}}</span> </p>
+
+
+                                    <div class="controls">
+                                        <a href="#"><i class="icon-software icon-software-pencil"></i></a> <a href="#"><i class="icon-arrows icon-arrows-circle-remove"></i></a>
+                                    </div>
+                                </li>
+
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <ngb-pagination [pageSize]="4" [collectionSize]="apoiments.length" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
+    </div>
+    <!-- END TODO LIST -->
+</div>
+
+<app-apointment showModal="showModal"></app-apointment>
