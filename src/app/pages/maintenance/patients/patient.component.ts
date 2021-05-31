@@ -2,23 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CountryService } from 'src/app/services/country.service';
-import { PatiensService } from '../../../services/patiens.service';
 import { FormsService } from '../../../services/forms.service';
 import { Person } from 'src/app/models/person.mode';
+import { PatientsService } from 'src/app/services/patients.service';
 
 
 @Component({
-  selector: 'app-patien',
-  templateUrl: './patien.component.html',
-  styleUrls: ['./patien.component.css']
+  selector: 'app-patient',
+  templateUrl: './patient.component.html',
+  styleUrls: ['./patient.component.css']
 })
-export class PatienComponent implements OnInit {
-  formPatien: FormGroup;
+export class PatientComponent implements OnInit {
+  formPatient: FormGroup;
   private isEmail = /\S+@\S+\.\S+/;
   countries: any;
-  patien: Person;
+  patient: Person;
   btnTitle: string;
-  constructor(private patiensService: PatiensService,
+  constructor(private patientsService: PatientsService,
               private countryService: CountryService,
               public formsService: FormsService,
               private router: Router,
@@ -35,11 +35,11 @@ export class PatienComponent implements OnInit {
     this.btnTitle = 'Save';
 
     if (this.route.snapshot.params.id) {
-      this.patiensService
-        .getPatien(this.route.snapshot.params.id)
+      this.patientsService
+        .getPatient(this.route.snapshot.params.id)
         .subscribe(resp => {
-          this.patien = resp[0];
-          this.setFormData(this.patien);
+          this.patient = resp[0];
+          this.setFormData(this.patient);
           this.btnTitle = 'Edit';
         });
   }
@@ -48,7 +48,7 @@ export class PatienComponent implements OnInit {
 
 
     initformPatien() {
-    this.formPatien = this.fb.group({
+    this.formPatient = this.fb.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.pattern(this.isEmail)]],
       notes: ['', [Validators.minLength(10), Validators.maxLength(200)]],
@@ -56,7 +56,7 @@ export class PatienComponent implements OnInit {
       gender: ['', [Validators.required]],
 
     });
-    this.formPatien.reset();
+    this.formPatient.reset();
   }
 
 
@@ -70,33 +70,33 @@ export class PatienComponent implements OnInit {
   }
 
 
-    addPatien(patien: Person) {
-    this.patiensService.addPatien(patien);
-    this.router.navigateByUrl('/patients');
+    addPatient(patient: Person) {
+    this.patientsService.addPatient(patient);
+    this.router.navigateByUrl('/admin/patients');
 
   }
 
     edit() {
 
-    this.patien.name = this.formPatien.get('name').value;
-    this.patien.email = this.formPatien.get('email').value;
-    this.patien.notes = this.formPatien.get('notes').value;
-    this.patien.country = this.formPatien.get('country').value;
-    this.patien.gender = this.formPatien.get('gender').value;
+    this.patient.name = this.formPatient.get('name').value;
+    this.patient.email = this.formPatient.get('email').value;
+    this.patient.notes = this.formPatient.get('notes').value;
+    this.patient.country = this.formPatient.get('country').value;
+    this.patient.gender = this.formPatient.get('gender').value;
 
-    this.patiensService.editPatien(this.patien)
+    this.patientsService.editPatient(this.patient)
     .then(res => this.router
-      .navigateByUrl('/admin/patiens'));
+      .navigateByUrl('/admin/patients'));
 
   }
 
-    save(patien: Person) {
-    debugger;
-    if (this.formPatien.valid) {
+    save(patient: Person) {
+
+    if (this.formPatient.valid) {
       if (this.btnTitle === 'Save') {
-        this.patiensService.addPatien(patien)
+        this.patientsService.addPatient(patient)
           .then(res => this.router
-            .navigateByUrl('/patient'));
+            .navigateByUrl('/admin/patients'));
       } else {
         this.edit();
       }
@@ -105,12 +105,12 @@ export class PatienComponent implements OnInit {
   }
 
 
-    setFormData(patien: Person) {
-    this.formPatien.get('name').setValue(patien.name);
-    this.formPatien.get('email').setValue(patien.email);
-    this.formPatien.get('notes').setValue(patien.notes);
-    this.formPatien.get('country').setValue(patien.country);
-    this.formPatien.get('gender').setValue(patien.gender);
+    setFormData(patient: Person) {
+    this.formPatient.get('name').setValue(patient.name);
+    this.formPatient.get('email').setValue(patient.email);
+    this.formPatient.get('notes').setValue(patient.notes);
+    this.formPatient.get('country').setValue(patient.country);
+    this.formPatient.get('gender').setValue(patient.gender);
   }
 
 }

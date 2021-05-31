@@ -8,35 +8,35 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class PatiensService {
+export class PatientsService {
 
   constructor(private firestone: AngularFirestore, private authService: AuthService) { }
 
-  getPatiens() {
-    return this.firestone.collection<Person>('patiens',
+  getPatients() {
+    return this.firestone.collection<Person>('patients',
       ref => ref.where('user', '==',
         this.authService.email)).valueChanges();
   }
 
 
-  getPatien(id: string) {
-    return this.firestone.collection<Person>('patiens', ref => ref.where('id', '==', id)).valueChanges();
+  getPatient(id: string) {
+    return this.firestone.collection<Person>('patients', ref => ref.where('id', '==', id)).valueChanges();
   }
 
-  searchPatien(field: string) {
-    return this.firestone.collection<Person>('patiens', ref => ref
+  searchPatient(field: string) {
+    return this.firestone.collection<Person>('patients', ref => ref
       .where('user', '==', this.authService.email)
     ).valueChanges().pipe(
       map(serv => serv.filter(p => p.name.includes(field))
       ));
   }
 
-  addPatien(patien: Person) {
-    patien.id = uuidv4();
-    patien.user = this.authService.email;
-    return this.firestone.collection('patiens').doc(patien.id).set(patien);
+  addPatient(patient: Person) {
+    patient.id = uuidv4();
+    patient.user = this.authService.email;
+    return this.firestone.collection('patients').doc(patient.id).set(patient);
   }
-  editPatien(patien: Person) {
-    return this.firestone.collection('patiens').doc(patien.id).update(patien);
+  editPatient(patient: Person) {
+    return this.firestone.collection('patients').doc(patient.id).update(patient);
   }
 }

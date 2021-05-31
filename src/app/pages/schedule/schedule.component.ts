@@ -1,9 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Apoinment } from '../../models/apoinment.model';
 import { ScheduleService } from '../../services/schedule.service';
-import { DoctorService } from '../../services/doctor.service';
-import { PatiensService } from '../../services/patiens.service';
-import { Person } from '../../models/person.mode';
 import Swal from 'sweetalert2';
 
 

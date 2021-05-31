@@ -4,15 +4,14 @@
 export const environment = {
   production: false,
   base_url: '',
-  firebaseConfig: {
-    apiKey: 'AIzaSyBOUiQYVBjLSJbOE6b-KUHVAt6sXCxrzKM',
-    authDomain: 'dental-932f1.firebaseapp.com',
-    projectId: 'dental-932f1',
-    storageBucket: 'dental-932f1.appspot.com',
-    messagingSenderId: '68155322477',
-    appId: '1:68155322477:web:1ebf423ba2940f95fe0f64'
+  firebaseConfig:{
+    apiKey: 'AIzaSyBPK-tWZyxcOnNrtiZE3A0spGnBTNxxdus',
+    authDomain: 'dental-961c2.firebaseapp.com',
+    projectId: 'dental-961c2',
+    storageBucket: 'dental-961c2.appspot.com',
+    messagingSenderId: '761065914017',
+    appId: '1:761065914017:web:594b123e41b7d42210fae0'
   }
-
 
 };
 

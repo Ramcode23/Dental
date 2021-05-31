@@ -5,8 +5,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { Apoinment } from '../models/apoinment.model';
 import { map } from 'rxjs/operators';
 import { DoctorService } from './doctor.service';
-import { PatiensService } from './patiens.service';
+
 import { Person } from '../models/person.mode';
+import { PatientsService } from './patients.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +17,9 @@ export class ScheduleService {
   parients: Person[] = [];
   public apoiments: Apoinment[] = [];
   constructor(private firestone: AngularFirestore,
-    private authService: AuthService,
-    private doctorService: DoctorService,
-    private patiensService: PatiensService
+              private authService: AuthService,
+              private doctorService: DoctorService,
+              private patientsService: PatientsService
   ) { }
 
   addapoinment(apoinment: Apoinment) {
@@ -28,10 +29,8 @@ export class ScheduleService {
   }
 
   getApoinments() {
-
-
     this.doctorService.getDoctors().subscribe(resp => this.doctors = resp);
-    this.patiensService.getPatiens().subscribe(resp => this.doctors = resp);
+    this.patientsService.getPatients().subscribe(resp => this.doctors = resp);
     return this.firestone.collection<Apoinment>('apoinments',
       ref => ref.where('user', '==',
         this.authService.email)).valueChanges();

@@ -35,12 +35,9 @@
 
                     <br>
                     <textarea formControlName="notes" class="form-control" placeholder="Notes" rows="4" [ngClass]="formsService.isValidField('notes',doctorForm)"></textarea>
-
-
                     <div *ngIf="formsService. isMaxField('notes',doctorForm)">
                         <span class="text-danger">
                             The note must be less than or equal to {{doctorForm.get('notes').errors?.maxlength?.requiredLength}}
-
                         </span>
                     </div>
 
@@ -56,26 +53,16 @@
                     </div>
                     <br>
 
-
-
-
                     <div class="form-check">
                         <input class="form-check-input" id="male" formControlName="gender" name="gender" value="Male" type="radio" [ngClass]="formsService.isValidField('gender',doctorForm)">
-                        <label class="form-check-label" for="male">
-           Male
-          </label>
+                        <label class="form-check-label" for="male">Male</label>
 
                     </div>
 
                     <div class="form-check">
                         <input class="form-check-input" id="female" formControlName="gender" name="gender" value="Female" type="radio" [ngClass]="formsService.isValidField('gender',doctorForm)">
-                        <label class="form-check-label" for="female">
-           Female
-          </label>
-
+                        <label class="form-check-label" for="female">Female</label>
                     </div>
-
-
 
                     <div *ngIf=" formsService.isRequiredField('gender',doctorForm)">
                         <span class="text-danger">
@@ -86,9 +73,6 @@
                     <br>
                     <button [disabled]="doctorForm.invalid" class="btn btn-primary btn-block" type="submit">{{btnTitle}}</button>
                 </div>
-
-
-
             </form>
         </div>
     </div>

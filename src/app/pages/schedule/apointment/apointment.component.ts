@@ -2,7 +2,8 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Person } from 'src/app/models/person.mode';
 import { DoctorService } from 'src/app/services/doctor.service';
-import { PatiensService } from 'src/app/services/patiens.service';
+import { PatientsService } from 'src/app/services/patients.service';
+
 import { Apoinment } from '../../../models/apoinment.model';
 import { FormsService } from '../../../services/forms.service';
 import { ScheduleService } from '../../../services/schedule.service';
@@ -26,10 +27,10 @@ export class ApointmentComponent implements OnInit {
 
 
   constructor(private fb: FormBuilder,
-    private doctorService: DoctorService,
-    private patiensService: PatiensService,
-    public formsService: FormsService,
-    private scheduleService: ScheduleService,
+              private doctorService: DoctorService,
+              private patientsService: PatientsService,
+              public formsService: FormsService,
+              private scheduleService: ScheduleService,
   ) {
 
   }
@@ -44,7 +45,7 @@ export class ApointmentComponent implements OnInit {
   initData() {
     this.doctorService.getDoctors()
       .subscribe(doctors => this.doctors = doctors);
-    this.patiensService.getPatiens()
+    this.patientsService.getPatients()
       .subscribe(patiens => this.patiens = patiens);
   }
 

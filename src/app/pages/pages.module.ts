@@ -12,14 +12,15 @@ import { DoctorComponent } from './maintenance/doctors/doctor.component';
 import { DoctorsComponent } from './maintenance/doctors/doctors.component';
 import { DiagnosticComponent } from './maintenance/diagnostic/diagnostic.component';
 import { DiagnosticsComponent } from './maintenance/diagnostics/diagnostics.component';
-import { PatienComponent } from './maintenance/patiens/patien.component';
-import { PatiensComponent } from './maintenance/patiens/patiens.component';
+
 import { ServiceComponent } from './maintenance/services/service.component';
 import { ServicesComponent } from './maintenance/services/services.component';
 import { PagesComponent } from './pages.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { SharedModule } from '../shared/shared.module';
 import { DiagnosticGuard } from '../guards/diagnostic.guard';
+import { PatientsComponent } from './maintenance/patients/patients.component';
+import { PatientComponent } from './maintenance/patients/patient.component';
 
 
 
@@ -32,8 +33,8 @@ import { DiagnosticGuard } from '../guards/diagnostic.guard';
     DoctorComponent,
     ServicesComponent,
     ServiceComponent,
-    PatienComponent,
-    PatiensComponent,
+    PatientComponent,
+    PatientsComponent,
     PagesComponent,
     DiagnosticComponent,
     DiagnosticsComponent,

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DoctorService } from '../../../services/doctor.service';
 import { FormsService } from '../../../services/forms.service';
-import { PatiensService } from '../../../services/patiens.service';
+
 import { Person } from '../../../models/person.mode';
 import { Service, Details } from '../../../models/service.model';
 import { ServiceService } from '../../../services/service.service';
@@ -13,6 +13,7 @@ import { DiagnosticService } from '../../../services/diagnostic.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { async } from '@angular/core/testing';
 import { DatePipe } from '@angular/common';
+import { PatientsService } from 'src/app/services/patients.service';
 
 
 @Component({
@@ -37,7 +38,7 @@ export class DiagnosticComponent implements OnInit {
               private route: ActivatedRoute,
               private diagnosticService: DiagnosticService,
               private doctorService: DoctorService,
-              private patiensService: PatiensService,
+              private patientsService: PatientsService,
               private serviceService: ServiceService,
               public formsService: FormsService,
 
@@ -65,7 +66,7 @@ export class DiagnosticComponent implements OnInit {
   initData() {
     this.doctorService.getDoctors()
       .subscribe(doctors => this.doctors = doctors);
-    this.patiensService.getPatiens()
+    this.patientsService.getPatients()
       .subscribe(patiens => this.patiens = patiens);
     this.serviceService.getservices()
       .subscribe(services => this.services = services);

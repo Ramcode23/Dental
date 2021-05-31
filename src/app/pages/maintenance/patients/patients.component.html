@@ -3,7 +3,7 @@
         <a routerLink="/admin/patient" type="button" class="btn btn-primary btn-lg mb-2"> Create</a>
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Patiens</h3>
+                <h3 class="card-title">Patients</h3>
 
                 <br>
                 <div class="input-group col-md-5 float-md-right float-lg-right float-right mb-1">
@@ -18,9 +18,9 @@
                 <div *ngIf="loanding">
                     <app-loader> Loandin........ </app-loader>
                 </div>
-                <app-nodata *ngIf="patiens.length==0 && loanding==false"></app-nodata>
+                <app-nodata *ngIf="patients.length==0 && loanding==false"></app-nodata>
 
-                <div class="card-body" *ngIf="patiens.length>0 && loanding==false">
+                <div class="card-body" *ngIf="patients.length>0 && loanding==false">
                     <div class="table-responsive table-responsive-sm table-responsive-md">
 
                         <table class="table animate__animated animate__fadeIn">
@@ -34,7 +34,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let patien of patiens | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                                <tr *ngFor="let patien of patients | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
 
                                     <td>{{patien.name}}</td>
                                     <td>{{patien.email}}</td>
@@ -47,7 +47,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <ngb-pagination [pageSize]="5" [collectionSize]="patiens.length" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
+                    <ngb-pagination [pageSize]="5" [collectionSize]="patients.length" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
                 </div>
             </div>
         </div>
