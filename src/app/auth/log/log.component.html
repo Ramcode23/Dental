@@ -11,8 +11,14 @@
             <div class="card  mt-5  loginbox">
 
                 <div class="card-body">
-                    <h4 class="card-title">Please login</h4>
-                    <button class="btn btn-danger" (click)="login()"><i class="fa fa-google" ></i>Login with Google</button>
+                      <div class="google-btn" (click)="login()">
+                        <div class="google-icon-wrapper">
+                            <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="google button" />
+                        </div>
+                        <p class="btn-text">
+                            <b class="ml-5">Sign in with google</b>
+                        </p>
+                    </div>
                 </div>
             </div>
 
